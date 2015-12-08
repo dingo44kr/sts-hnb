@@ -25,7 +25,7 @@ public class MainController {
 	@RequestMapping(value = "/", method = RequestMethod.GET) 
 	// value에는 url을 입력하여, jsp에서 할당한 주소와 동일한 주소를 준 이곳으로 들어올 수 있도록 하는 역할을 함.
 	public String home(Locale locale, Model model) { //여기서 모델은 response, request의 역할을 모두 포함한다.
-		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("메인컨트롤러 home 메서드 진입 {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
