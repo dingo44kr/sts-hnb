@@ -2,6 +2,10 @@ package com.hnb.member;
 
 import java.io.Serializable;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Component;
+@Component
 public class MemberVO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
