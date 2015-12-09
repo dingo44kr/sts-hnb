@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -23,33 +24,32 @@ public class MovieController {
 	MovieVO movie;
 	
 	@RequestMapping("/Movie")
-	public String home() {
+	public String movie() {
 		logger.info("MovieController-home() 진입");
-		return "movie/Movie";
+		return "movie/Movie.tiles";
 	}
 	
 	@RequestMapping("/movie_info")
-	public String movieInfo(Model model) {
+	public Model movieInfo(Model model) {
 		logger.info("MovieController-movieInfo() 진입");
 		List<MovieVO> list = service.getList();
 		model.addAttribute("movieList", list);
 		logger.info("영화리스트 조회결과{}", list);
-		return "movie/movie_Info";
+		return model;
 	}
 	
 	@RequestMapping("/movie_name/{movieName}")
-	public String movieName(
+	public @ResponseBody MovieVO movieName(
 			@PathVariable("movieName")String filmNumber
-			,Model model) {
+			) {
 		logger.info("MovieController-movieName() 진입");
 		logger.info("영화 아이디{}",filmNumber);
 		movie = service.searchByName(filmNumber);
 		logger.info("영화제목 : {}",movie.getFilmName());
-		model.addAttribute("movie", movie);
-		return "movie/movie_name";
+		return movie;
 	}
 	@RequestMapping("/movie_Cut")
-	public String movieCut(
+	public Model movieCut(
 			String filmNumber, Model model /*@RequestParam("filmNumber")String fileNumber 중 @RequestParam("filmNumber") 생략.*/
 			/*에버노트의 "요청 핸들러 매개변수 타입"의 표, @RequestParam 부분 참고.*/
 			/*String filmNumber = request.getParameter("filmNumber"); 와 같은 구문, 앞의 @RequestParam("filmNumber")은 생략됨 */
@@ -62,10 +62,10 @@ public class MovieController {
 		String[] arr = cut.split("/");
 		logger.info("결과 cut.split{}", arr);
 		model.addAttribute("jsonString", arr);
-		return "movie/movie_Cut";
+		return model;
 	}
 	@RequestMapping("/movie_Tra")
-	public String movieTra(
+	public Model movieTra(
 			String filmNumber, Model model
 			) {
 		logger.info("MovieController-movieTra() 진입");
@@ -76,16 +76,18 @@ public class MovieController {
 		String[] arrt = tra.split("/");
 		logger.info("트레일러 목록인 tra.split(){}", arrt);
 		model.addAttribute("jsonString", arrt);
-		return "movie/movie_Tra";
+		return model;
 	}
 	
 	@RequestMapping("/movie_Basic")
-	public String movieBasic(
-			String filmNumber,
-			Model model
+	public @ResponseBody MovieVO movieBasic(
+			String filmNumber
 			) {
 		logger.info("MovieController-movieBasic() 진입");
-		return "movie/movie_Basic";
+		logger.info("MovieCut의 filmNumber: {}",filmNumber);
+		movie = service.searchByName(filmNumber);
+		logger.info("MovieBasic컷의 영화제목: {}",movie.getFilmName());
+		return movie;
 	}
 	@RequestMapping("/movie_Chart")
 	public String movieChart() {
