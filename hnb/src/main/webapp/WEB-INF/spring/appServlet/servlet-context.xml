@@ -16,17 +16,23 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	
+	<!-- 
+	
+	SOAP 방식의 리턴값 결정인데, 타일즈를 사용하게 되면 제거해야한다. (SOAP 방식 : XML로 데이터 통신을 하는 것.)
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp"  이 구문 대신 타일즈를 사용하게 됨 />
-	</beans:bean> -->
+	</beans:bean> 
+	
+	-->
 	
 	<context:component-scan base-package="com.hnb" />
 	
 	
 	<!-- org.springframework.web.servlet.view.tiles2.TilesConfigurer -->
-
 	<!-- 타일즈 -->
 	<beans:bean id = "tilesConfigurer" class = "org.springframework.web.servlet.view.tiles2.TilesConfigurer">
 	<beans:property name="definitions">
@@ -38,9 +44,11 @@
 	
 	<!-- org.springframework.web.servlet.view.UrlBasedViewResolver -->
 	<!-- org.springframework.web.servlet.view.tiles2.TilesView -->
+	
 	<beans:bean id ="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<beans:property name ="viewClass" value="org.springframework.web.servlet.view.tiles2.TilesView"/>
 	</beans:bean>
+	
 	
 	<!-- JSON 타입을 사용할 수 있도록, @ResponseBody 사용가능하게 함 -->
 	<beans:bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>

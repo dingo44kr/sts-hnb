@@ -12,9 +12,24 @@
   <!-- 상속 -->
  <definition name="*/*.tiles" extends="layout">
  	<put-attribute name="header" value="/WEB-INF/views/global/header.jsp" />
-    <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+    <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
+    <!-- 컨트롤러에서 리턴해준 값에 따라 */*.tiles는 이곳으로 들어와 */* => 1번 2번 위치에 할당(삽입)되게 된다. -->
  </definition>
  
+ 
+  <definition name="noTiles" template="/WEB-INF/views/noTemplate.jsp">
+    <put-attribute name="noTemplate" value="" /> 
+  </definition>
+  <definition name="*.jsp" extends="noTiles">
+    <put-attribute name="noTemplate" value="/WEB-INF/views/{1}.jsp" /> 
+  </definition>
+   <definition name="*/*.jsp" extends="noTiles">
+    <put-attribute name="noTemplate" value="/WEB-INF/views/{1}/{2}.jsp" /> 
+  </definition>
+  <definition name="*/*/*.jsp" extends="noTiles">
+    <put-attribute name="noTemplate" value="/WEB-INF/views/{1}/{2}/{3}.jsp" /> 
+  </definition>
+ 
+ 
 </tiles-definitions>
-
 <!-- 현재 이 페이지에서 cdn으로 타일즈 기능을 구현하여 이곳에서 사용할 수 있게 만든다. -->
