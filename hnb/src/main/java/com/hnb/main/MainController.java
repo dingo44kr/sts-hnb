@@ -34,9 +34,8 @@ public class MainController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		
 		return "global/Main.tiles"; //어느 경로로 갈것인지를 결정함 
-	}
+	} // 지금 현재 위의 경로는 예전의 소스로 보자면,  /WEB-INF/tiles.xml + global/Main.tiles 인데 어째서 /WEB-INF/tiles.xml로 바로 가는지 이해가 안감.
 	
 	
 }
