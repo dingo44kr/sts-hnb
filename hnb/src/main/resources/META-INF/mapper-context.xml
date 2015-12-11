@@ -3,13 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
-  <mappers>
+	<!-- <typeAliases>
+		<typeAlias type="com.hnb.movie.MovieVO" alias="Movie"/>
+	</typeAliases> -->
+  <!--
+  	mybatis-context.xml의 27번 라인에서 이 기능을 대신해줌.
+   <mappers>
     <mapper resource="com/hnb/mapper/AdminMapper.xml"/>
     <mapper resource="com/hnb/mapper/ArticleMapper.xml"/>
     <mapper resource="com/hnb/mapper/MemberMapper.xml"/>
     <mapper resource="com/hnb/mapper/MovieMapper.xml"/>
     <mapper resource="com/hnb/mapper/ScheduleMapper.xml"/>
     <mapper resource="com/hnb/mapper/TicketMapper.xml"/>
-  </mappers>
+  </mappers> -->
 </configuration>

@@ -39,13 +39,13 @@ public class MovieController {
 	}
 	
 	@RequestMapping("/movie_name/{movieName}")
-	public @ResponseBody MovieVO movieName(
+	public @ResponseBody MovieVO movieName( //위의 {movieName}을 받아오기 위해서는 43번 라인에서 PathVariable DI를 사용해야 함.
 			@PathVariable("movieName")String filmNumber
 			) {
 		logger.info("MovieController-movieName() 진입");
 		logger.info("영화 아이디{}",filmNumber);
 		movie = service.searchByName(filmNumber);
-		logger.info("영화제목 : {}",movie.getFilmName());
+		logger.info("영화제목 : {}", movie.getFilmName());
 		return movie;
 	}
 	@RequestMapping("/movie_Cut")
@@ -90,8 +90,12 @@ public class MovieController {
 		return movie;
 	}
 	@RequestMapping("/movie_Chart")
-	public String movieChart() {
+	public @ResponseBody List<MovieVO> movieChart(Model model) {
 		logger.info("MovieController-movie_Chart() 진입");
-		return "movie/movie_Chart";
+		List<MovieVO> list = service.getList();
+		System.out.println("서비스 리턴값:" +list);
+		logger.info("영화리스트 {}", list);
+		/*model.addAttribute("list", list);*/
+		return list;
 	}
 }
