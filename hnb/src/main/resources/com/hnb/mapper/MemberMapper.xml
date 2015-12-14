@@ -3,11 +3,81 @@
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
  <mapper namespace="com.hnb.mapper.MemberMapper">
-     <select id="getOne" resultType="com.hnb.member.MemberVO">
-             SELECT * FROM user WHERE name = #{name}  
+     <select id="selectAll" resultType="com.hnb.member.MemberVO" parameterType="com.hnb.global.Command">
+     SELECT
+	     ID AS id,
+	     PASSWORD AS password,
+	     NAME AS name,
+	     BIRTH AS birth,
+	     GENDER AS gender,
+	     PHONE AS phone,
+	     ADDR AS addr,
+	     EMAIL AS email,
+	     REGDATE AS regdate     
+     FROM (SELECT ROWNUM AS seq, m.* FROM MEMBER m)	<!-- 17번 구문은 멤버에 해당하는 모든 컬럼(m.*)에 시퀀스를 하나씩 붙인다는 구문입니다. --> 
+     WHERE seq BETWEEN #{start} AND #{end}
+     
      </select>
- 
-     <select id="getUser" resultType="com.hnb.member.MemberVO">
-             SELECT * FROM user
+     
+     <select id="selectSomeBy" resultType= "com.hnb.member.MemberVO" parameterType="com.hnb.global.Command">
+     SELECT
+	     ID AS id,
+	     PASSWORD AS password,
+	     NAME AS name,
+	     BIRTH AS birth,
+	     GENDER AS gender,
+	     PHONE AS phone,
+	     ADDR AS addr,
+	     EMAIL AS email,
+	     REGDATE AS regdate
+     FROM MEMBER WHERE #{column} = #{keyword}
      </select>
+     
+     <select id="selectOneBy" resultType = "com.hnb.member.MemberVO" parameterType="string">
+     SELECT
+	     ID AS id,
+	     PASSWORD AS password,
+	     NAME AS name,
+	     BIRTH AS birth,
+	     GENDER AS gender,
+	     PHONE AS phone,
+	     ADDR AS addr,
+	     EMAIL AS email,
+	     REGDATE AS regdate
+     FROM MEMBER WHERE ID = #{id}
+     </select>
+     
+     <select id="count" resultType="int">
+     	SELECT COUNT(*) AS COUNT FROM MEMBER
+     </select>
+     
+     
+     <insert id="insert" parameterType="com.hnb.member.MemberVO">
+     INSERT INTO MEMBER (ID,PASSWORD,NAME,BIRTH,GENDER,PHONE,ADDR,EMAIL,REGDATE) 
+     VALUES (
+	     #{id},
+	     #{password},
+	     #{name},
+	     #{birth},
+	     #{gender},
+	     #{phone},
+	     #{addr},
+	     #{email},
+	     sysdate
+	 )
+     </insert>
+     
+     <update id="update" parameterType="com.hnb.member.MemberVO">
+     UPDATE MEMBER SET 
+     	PASSWORD = #{password},
+     	ADDR = #{addr},
+     	PHONE = #{phone},
+     	EMAIL = #{email}
+     	WHERE ID = #{id}
+     </update>
+     
+     <delete id="delete" parameterType="string">
+     DELETE FROM MEMBER WHERE ID = #{id}
+     </delete>
+     
  </mapper>
