@@ -1,6 +1,6 @@
 package com.hnb.global;
 
-public class Command implements Orderable{
+public class Command implements Orderable{ //현재 용도 변경이 됨.
 	private String column, keyword;
 	private int pageNo, start, end;
 	public final int PAGESIZE = 5;

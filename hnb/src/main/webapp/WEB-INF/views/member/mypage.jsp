@@ -2,25 +2,23 @@
 <script src="${context}/js/global.js"></script>
 <script type="text/javascript">
 	$(function() {
-		Global.init();
-		$('#header').load('${context}/main.do?page=header'); 
-		$('#footer').load('${context}/main.do?page=footer');
-		Member.detail('${context}/member.do?page=detail&userid=${member.userid}');
+		LoginMember.detail('${context}/member/detail/${user.id}');
 	});
-	var Member = {
+	var LoginMember = {
 			detail : function(url) {
 				$.getJSON(url,
 					function(data){
-					var table = '<table><tr><td rowspan="8" id="td_profile"><img id="profile" src="${context}/images/${member.profile}" width="70%" height="80%"/></td>'
-					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${member.userid}</td></tr><tr><td>비밀번호</td><td>${member.password}"'
-					+'</td></tr><tr><td>이름</td><td>${member.name}</td></tr><tr><td>생일</td><td>${member.gender}</td></tr><tr>'
-					+'<td>주소</td><td>${member.addr}</td></tr><tr><td>이메일</td><td>${member.email}</td>'
-					+'</tr><tr><td>등록일</td><td>${member.regdate}</td></tr><tr>'
+					var table = '<table id ="tab_detail"><tr><td rowspan="8" id="td_profile"><img id="profile" src="${img}/default.png" width="70%" height="80%"/></td>'
+					+'<th id="item">항목</th><th>빈 칸</th></tr><tr><td>아이디</td><td>${user.id}</td></tr><tr><td>비밀번호</td><td>${user.password}'
+					+'</td></tr><tr><td>이름</td><td>${user.name}</td></tr><tr><td>생일</td><td>${user.gender}</td></tr><tr>'
+					+'<td>주소</td><td>${user.addr}</td></tr><tr><td>이메일</td><td>${user.email}</td>'
+					+'</tr><tr><td>등록일</td><td>${user.regdate}</td></tr><tr>'
 					+'<td><button id="changeImg">사진변경</button></td>'
 					+'<td><button id="changeInfo">정보수정</button><button id="remove">회원탈퇴</button></td>'
 					+'<td><button id="confirm">확인</button></td></tr></table>';
-					$('#box').html(table);
-					Member.style();
+					$('.mainView').empty();
+					$('.mainView').html(table);
+					LoginMember.style();
 					$('#changeInfo').click(function() {
 						Member.updateForm();
 					});
@@ -46,7 +44,7 @@
 					+'<td><button id="changeInfo">정보수정</button></td>'
 					+'<td><button id="confirm">확인</button></td></tr></table>';
 					$('#frm').html(table);
-					Member.style();
+					LoginMember.style();
 					$('#confirm').click(function() {
 						$('#frm').submit(function(e) {
 							e.preventDefault(); /* 기본 폼태그의 서브밋을 막아라. 자스의 서브밋을 실행해라 */
@@ -88,12 +86,14 @@
 				});
 			},
 			style : function(){
-				$('td').css('text-align','center');
-				$('tr').add('th').add('td').css('float','center');
-				$('#box').css('clear','both').css('margin','20px');
+				$('#tab_detail').css('width','80%').css('margin','auto').css('border','1px solid white');
+				$('td').add('th').css('text-align','center').css('border','1px solid white');
+				$('tr').add('th').add('td').css('float','center').css('border','1px solid white').css('color', 'white');
 				$('#item').css('width','400px');
 				$('#profile').css('width','300px');
 				$('#td_profile').css('width','400px');
+				$('.mainView').css('background','rgba(105, 4, 4, 0.41)');
+				$('#changeImg').add('#changeInfo').add('#confirm').add('#remove').css('color','black');
 			},
 			remove : function(userid) {
 				$.ajax('${context}/member.do',{

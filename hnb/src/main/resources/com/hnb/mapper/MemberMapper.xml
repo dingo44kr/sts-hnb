@@ -30,7 +30,11 @@
 	     ADDR AS addr,
 	     EMAIL AS email,
 	     REGDATE AS regdate
-     FROM MEMBER WHERE #{column} = #{keyword}
+     FROM (SELECT ROWNUM AS seq, m.* FROM (
+     	SELECT * FROM MEMBER 
+     	WHERE ${column} LIKE '%' || #{keyword} || '%' <!-- WHERE NAME LIKE '%홍%' ( ||는 '+'를 의미함, 홍자가 들어가는 모든 것을 검색 ) -->
+     ) m)
+     WHERE seq BETWEEN #{start} AND #{end}
      </select>
      
      <select id="selectOneBy" resultType = "com.hnb.member.MemberVO" parameterType="string">
@@ -46,6 +50,17 @@
 	     REGDATE AS regdate
      FROM MEMBER WHERE ID = #{id}
      </select>
+     
+     
+     <select id="countBykeyword" resultType= "int" parameterType="com.hnb.global.Command">
+     SELECT COUNT(*) AS COUNT 
+     FROM MEMBER
+     WHERE ${column} LIKE '%' || #{keyword} || '%'
+     
+     </select>
+     
+     
+     
      
      <select id="count" resultType="int">
      	SELECT COUNT(*) AS COUNT FROM MEMBER

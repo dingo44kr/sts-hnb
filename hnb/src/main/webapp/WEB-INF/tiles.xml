@@ -3,17 +3,30 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+<!-- 일반사용자용 -->
   <definition name="layout" template="/WEB-INF/views/layout.jsp">
     <put-attribute name="header" value="" />
     <put-attribute name="content" value="" />
     <put-attribute name="footer" value="/WEB-INF/views/global/footer.jsp" />
   </definition>
+<!-- 관리자용 -->
+  <definition name="admin_layout" template="/WEB-INF/views/layout.jsp">
+    <put-attribute name="header" value="" />
+    <put-attribute name="content" value="" />
+    <put-attribute name="footer" value="/WEB-INF/views/global/footer.jsp" />
+  </definition>
   
-  <!-- 상속 -->
+  <!-- 일반사용자/ 상속 -->
  <definition name="*/*.tiles" extends="layout">
  	<put-attribute name="header" value="/WEB-INF/views/global/header.jsp" />
     <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
     <!-- 컨트롤러에서 리턴해준 값에 따라 */*.tiles는 이곳으로 들어와 */* => 1번 2번 위치에 할당(삽입)되게 된다. -->
+ </definition>
+ 
+  <!-- 관리자/ 상속 -->
+ <definition name="admin/*/*.tiles" extends="admin_layout">
+ 	<put-attribute name="header" value="/WEB-INF/views/admin/header.jsp" />
+    <put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" /> 
  </definition>
  
  

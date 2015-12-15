@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>   
 	
 	<div>
 	<div id="frm_toggle">
@@ -14,7 +14,7 @@
 			</p>
 			<p class="clearfix">
 				<a id="join_btn" class="log-twitter">회원 가입</a> 
-				<a id="login_btn" class="log-twitter" style="margin-left:10px;">로그인</a> 
+				<a id="login_btn" class="log-twitter" style="margin-left:10px;">로그인2</a> 
 			</p>
 		</div>
 		</c:if>
@@ -66,15 +66,16 @@
             <!-- /.navbar-collapse -->
     </nav>
 <script src="${js}/global.js"></script>  
-<script src="${js}/jquery.js"></script>
+
 <script src="${js}/bootstrap.js"></script>
-<script src="${js}/bootstrap.min.js"></script>
+<script src="${js}/bootstrap.min.js"></script> 
 <script src="${js}/member.js"></script>
 <script src="${js}/admin.js"></script>
 <script src="${js}/bom.js"></script>
 <script src="${js}/movie.js"></script>
 <script src="${js}/ticket.js"></script>
 <script type="text/javascript">
+
 	$(function() {
 		$(window).on("popstate", function(event) {
 		    var e = event.originalEvent.state;  // 이부분으로 뒤로가기 할때마다 아까 저장한 히스토리 스택에 쌓인 URL을 불러 온다
@@ -125,7 +126,7 @@
 		
 		$("#event_btn").click(function() {
 			history.pushState("Event_home","","");
-			$(".mainView").load("${context}/event/boardList");
+			$(".mainView").load("${context}/event/boardList/1");
 		});
 		
 		/* 로그인 버튼 */
@@ -134,7 +135,8 @@
 			Member.join("${context}");
 		});
 	
-		$("#header").on("click","#login_btn",function() {
+		$("#login_btn").click(function() {
+			alert('로그인 버튼 클릭');
 			Member.login("${context}");
 		});
 		
