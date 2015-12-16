@@ -14,7 +14,7 @@
 			</p>
 			<p class="clearfix">
 				<a id="join_btn" class="log-twitter">회원 가입</a> 
-				<a id="login_btn" class="log-twitter" style="margin-left:10px;">로그인2</a> 
+				<a id="login_btn" class="log-twitter" style="margin-left:10px;">로그인</a> 
 			</p>
 		</div>
 		</c:if>
@@ -53,27 +53,19 @@
                         <button id="movie_btn">영화</button> <!-- 네비바 해당 링크 존재 -->
                     </li>
                     <li>
-                        <button id="ticket_btn" href="#" >예매</button>
+                        <button id="ticket_btn">예매</button>
                     </li>
                     <li>
-                        <button id="theater_btn" href="#" >극장</button>
+                        <button id="theater_btn">극장</button>
                     </li>
                     <li>
-                        <button id="event_btn" href="#" >이벤트&컬쳐</button>
+                        <button id="event_btn">이벤트&컬쳐</button>
                     </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
     </nav>
-<script src="${js}/global.js"></script>  
 
-<script src="${js}/bootstrap.js"></script>
-<script src="${js}/bootstrap.min.js"></script> 
-<script src="${js}/member.js"></script>
-<script src="${js}/admin.js"></script>
-<script src="${js}/bom.js"></script>
-<script src="${js}/movie.js"></script>
-<script src="${js}/ticket.js"></script>
 <script type="text/javascript">
 
 	$(function() {
