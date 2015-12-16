@@ -13,7 +13,8 @@
 	     PHONE AS phone,
 	     ADDR AS addr,
 	     EMAIL AS email,
-	     REGDATE AS regdate     
+	     REGDATE AS regdate,
+	     PROFILE AS profile   
      FROM (SELECT ROWNUM AS seq, m.* FROM MEMBER m)	<!-- 17번 구문은 멤버에 해당하는 모든 컬럼(m.*)에 시퀀스를 하나씩 붙인다는 구문입니다. --> 
      WHERE seq BETWEEN #{start} AND #{end}
      
@@ -29,7 +30,8 @@
 	     PHONE AS phone,
 	     ADDR AS addr,
 	     EMAIL AS email,
-	     REGDATE AS regdate
+	     REGDATE AS regdate,
+	     PROFILE AS profile
      FROM (SELECT ROWNUM AS seq, m.* FROM (
      	SELECT * FROM MEMBER 
      	WHERE ${column} LIKE '%' || #{keyword} || '%' <!-- WHERE NAME LIKE '%홍%' ( ||는 '+'를 의미함, 홍자가 들어가는 모든 것을 검색 ) -->
@@ -47,7 +49,8 @@
 	     PHONE AS phone,
 	     ADDR AS addr,
 	     EMAIL AS email,
-	     REGDATE AS regdate
+	     REGDATE AS regdate,
+	     PROFILE AS profile
      FROM MEMBER WHERE ID = #{id}
      </select>
      
@@ -87,7 +90,8 @@
      	PASSWORD = #{password},
      	ADDR = #{addr},
      	PHONE = #{phone},
-     	EMAIL = #{email}
+     	EMAIL = #{email},
+     	PROFILE = #{profile}
      	WHERE ID = #{id}
      </update>
      

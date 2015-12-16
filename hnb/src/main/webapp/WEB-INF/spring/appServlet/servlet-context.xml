@@ -30,6 +30,11 @@
 	-->
 	
 	<context:component-scan base-package="com.hnb" />
+
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="50000000" />
+	</beans:bean>
 	
 	
 	<!-- org.springframework.web.servlet.view.tiles2.TilesConfigurer -->

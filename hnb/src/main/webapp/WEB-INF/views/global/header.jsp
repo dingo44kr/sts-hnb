@@ -69,90 +69,57 @@
 <script type="text/javascript">
 
 	$(function() {
-		$(window).on("popstate", function(event) {
-		    var e = event.originalEvent.state;  // 이부분으로 뒤로가기 할때마다 아까 저장한 히스토리 스택에 쌓인 URL을 불러 온다
-		    console.log("푸쉬상태 : " + e);
-		    switch (e) {
-			case "Admin_home":
-				Admin.home("${context}");
-				break;
-			case "Admin_member":
-				Admin.member("${context}");
-				break;
-			case "Admin_moive":
-				Member.movie("${context}");
-				break;
-			case "Movie_home":
-				Movie.home("${context}");
-				break;
-			case "Member_join":
-				Member.join("${context}");
-				break;
-			default:
-				$("#box").load("${context}/global/Main.do?page=default");
-				break;
-			}
-		});
+		
 		
 		/* 메인 버튼 */
 		$("#home").click(function() {
-			$("#box").load("${context}/global/Main.do?page=default");
+			$("#box").load(context+"/global/Main.do?page=default");
 		});
 		
 		/* 네비게이션 버튼 */
 		$("#movie_btn").click(function() {
-			alert("영화버튼!!")
-			history.pushState("Movie_home","","");
-			Movie.home("${context}");
+			Movie.home(context);
 		});
 		
 		$("#ticket_btn").click(function() {
-			history.pushState("Ticket_home","","");
-			$("#box").load("${context}/ticket/Ticket.do");
+			$("#box").load(context+"/ticket/Ticket.do");
 		});
 		
 		$("#theater_btn").click(function() {
-			history.pushState("Theater_home","","");
 			$("#box").load();
 		});
 		
 		$("#event_btn").click(function() {
-			history.pushState("Event_home","","");
-			$(".mainView").load("${context}/event/boardList/1");
+			$(".mainView").load(context+"/event/boardList");
 		});
 		
 		/* 로그인 버튼 */
 		$("#header").on("click","#join_btn",function() {
-			history.pushState("Member_join","","");
-			Member.join("${context}");
+			Member.join(context);
 		});
 	
 		$("#login_btn").click(function() {
-			alert('로그인 버튼 클릭');
-			Member.login("${context}");
+			Member.login(context);
 		});
 		
-		$("#header").on("click","#logout_btn",function() {
-			Member.logout("${context}");
+		$("#logout_btn").click(function() {
+			Member.logout(context);
 		});
 		
 		/*마이페이지 버튼 */
 		$("#header").on("click", "#mypage_btn",function() {
-			$("#box").load("${context}/member/Member.do?page=mypage");
+			$("#box").load(context+"/member/Member.do?page=mypage");
 		});
 		
 		/* 관리자 버튼 */
 		$("#outbox").on("click","#admin_home",function() {
-			history.pushState("Admin_home","","");
-			Admin.home("${context}");
+			Admin.home();
 		});
 		$("#outbox").on("click","#admin_member",function() {
-			history.pushState("Admin_member","","");
-			Admin.member("${context}");
+			Admin.member(context);
 		});
 		$("#outbox").on("click","#admin_movie",function() {
-			history.pushState("Admin_movie","","");
-			Admin.movie("${context}");
+			Admin.movie(context);
 		});
 		
 	
