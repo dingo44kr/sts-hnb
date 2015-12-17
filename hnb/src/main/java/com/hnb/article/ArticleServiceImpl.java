@@ -74,4 +74,32 @@ public class ArticleServiceImpl implements ArticleService{
 		return mapper.remove(rcdNo);
 	}
 
+	@Override
+	public List<ArticleVO> desc_list(Command command) {
+		logger.info("ArticleServiceImpl : desc_list");
+		ArticleMapper mapper = sqlSession.getMapper(ArticleMapper.class);
+		return mapper.desc_list(command);
+	}
+
+	@Override
+	public String searchPass(int rcdNo) {
+		logger.info("ArticleServiceImpl : searchPass");
+		ArticleMapper mapper = sqlSession.getMapper(ArticleMapper.class);
+		return mapper.searchPass(rcdNo);
+	}
+
+	@Override
+	public int Refer_Inc(int rcdNo) {
+		logger.info("ArticleServiceImpl : Refer_Inc");
+		ArticleMapper mapper = sqlSession.getMapper(ArticleMapper.class);
+		return mapper.Refer_Inc(rcdNo);
+	}
+
+	@Override
+	public int rcd_Change(ArticleVO articleVO) {
+		logger.info("ArticleServiceImpl : rcd_Change");
+		ArticleMapper mapper = sqlSession.getMapper(ArticleMapper.class);
+		return mapper.rcd_Change(articleVO);
+	}
+
 }

@@ -57,14 +57,13 @@
 
 
 
-<TABLE id = "pagenation">
+<TABLE id = "pagination">
 
 	<TR>
 		<TD ALIGN=LEFT WIDTH=100>
-			<IMG SRC="${img}/btn_new.gif" onClick="javascript:location.replace('BoardWrite.jsp')"; STYLE=CURSOR:HAND>
+			<IMG SRC="${img}/btn_new.gif" onClick="javascript:location.replace('BoardWrite.jsp')" STYLE=CURSOR:HAND>
 		</TD>
 		<TD WIDTH=320 ALIGN=CENTER>
-			<%-- <IMG SRC="${img}/btn_bf_block.gif">&nbsp; --%>
 			<c:if test="${startPage ne 1}">
 				<a href="${context}/event/boardList/1">
 					<IMG SRC="${img}/btn_bf_block.gif">&nbsp;
@@ -96,8 +95,6 @@
 					<IMG SRC="${img}/btn_nxt_page.gif">&nbsp;
 				</a>
 			</c:if>
-			
-			<%-- <IMG SRC="${img}/btn_nxt_block.gif"> --%>    	    		     
 		</TD>
 	
 		<TD WIDTH=200 ALIGN=RIGHT>

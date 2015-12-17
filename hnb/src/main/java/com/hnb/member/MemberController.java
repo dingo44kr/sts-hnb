@@ -1,5 +1,6 @@
 package com.hnb.member;
 
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,29 +88,21 @@ public class MemberController {
 		return "redirect:/"; /* jsp 를 타지 않고 그대로 MainController로 가게 됨, 풀경로로 다 주어야 함.*/
 	}
 
-	@RequestMapping("/login")
-	public @ResponseBody MemberVO login(String id, 
-			@RequestParam("pw")String password,
-			Model model
-			){
+	@RequestMapping(value="/login",method=RequestMethod.POST)
+	public @ResponseBody MemberVO login(@RequestBody MemberVO param, Model model){
 		logger.info("MemberController-login() 진입");
-		logger.info("유저 아이디{}", id);
-		logger.info("유저 비밀번호{}", password);
-		member = service.login(id, password);
+		logger.info("유저 아이디{}", param.getId());
+		logger.info("유저 비밀번호{}", param.getPassword());
+		member = service.login(param.getId(), param.getPassword());
 		model.addAttribute("user",member);
+		String u = member.getId();
+		logger.info("로그인과정에서 체크하는 아이디:{}",u);
 		// 로그인 실패시0
-		if (member.getId().equals(id)) {
+		if (member.getId().equals(param.getId())) {
 			logger.info("로그인성공");
 		} else {
 			logger.info("로그인실패");
 		}
-		// 로그인 성공시 (choa 관리자)
-			logger.info("컨트롤러 로그인 성공!!");
-			if (id.equals("choa")) {
-            	model.addAttribute("admin","yes");
-			} else {
-				model.addAttribute("admin","no");
-			}
 		return member;
 	}
 	

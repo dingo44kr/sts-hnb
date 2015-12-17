@@ -1,4 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.hnb.mapper.ArticleMapper"></mapper>
+<mapper namespace="com.hnb.mapper.ArticleMapper">
+
+<select id="count" resultType="int">
+SELECT COUNT(RCD_NO) FROM BOARD
+</select>
+
+<select id="desc_list" resultType="com.hnb.article.ArticleVO" parameterType="com.hnb.global.Command">
+SELECT
+RCD_NO AS rcdNo,
+USR_SUBJECT AS usrSubject,
+USR_NAME AS usrName,
+USR_DATE AS usrDate,
+USR_REFER AS usrRefer
+FROM BOARD ORDER BY RCD_NO DESC
+</select>
+
+<select id="searchById" resultType="com.hnb.article.ArticleVO" parameterType="int">
+SELECT
+USR_NAME AS usrName,
+USR_MAIL AS usrMail,
+USR_SUBJECT AS usrSubject,
+USR_CONTENT AS usrContent
+FROM BOARD WHERE RCD_NO=#{id}
+</select>
+<!--id or rcdNo 둘중에 무엇을 할지 해보자. -->
+
+
+ <select id="getList" resultType="com.hnb.article.ArticleVO" parameterType="com.hnb.global.Command">
+     	SELECT
+     		RCD_NO AS rcdNo,
+     		GRP_NO AS grpNo,
+     		THEME_NO AS themeNo,
+     		USR_NAME AS usrName,
+     		USR_MAIL AS usrMail,
+     		USR_SUBJECT AS usrSubject,
+     		USR_CONTENT AS usrComponent,
+     		USR_PASS AS usrPass,
+     		USR_FILENAME AS usrFileName,
+     		USR_FILESIZE AS usrFileSize,
+     		USR_DATE AS usrDate,
+     		USR_REFER AS usrRefer,
+     		RCD_LEVEL AS rcdLevel,
+     		RCD_ORDER AS rcdOrder
+     	FROM BOARD
+     </select>
+ 
+     <select id="selectSomeBy" parameterType="com.hnb.global.Command" resultType="com.hnb.article.ArticleVO">
+     	SELECT
+     		RCD_NO AS rcdNo,
+     		GRP_NO AS grpNo,
+     		THEME_NO AS themeNo,
+     		USR_NAME AS usrName,
+     		USR_MAIL AS usrMail,
+     		USR_SUBJECT AS usrSubject,
+     		USR_CONTENT AS usrComponent,
+     		USR_PASS AS usrPass,
+     		USR_FILENAME AS usrFileName,
+     		USR_FILESIZE AS usrFileSize,
+     		USR_DATE AS usrDate,
+     		USR_REFER AS usrRefer,
+     		RCD_LEVEL AS rcdLevel,
+     		RCD_ORDER AS rcdOrder
+     	FROM (SELECT ROWNUM AS seq, m.* FROM (
+ 		SELECT * FROM BOARD
+ 		WHERE ${column} LIKE '%' || #{keyword} || '%' <!-- => WHERE NAME LIKE '%홍%' --> 
+ 		) m)
+ 		WHERE seq BETWEEN #{start} AND #{end}
+     </select>
+
+
+
+
+<!-- 레코드의 패스워드 추출 -->
+<select id="searchPass" parameterType="int" resultType="String">
+SELECT 
+USR_PASS AS usrPass
+FROM BOARD WHERE RCD_NO = {#rcdNo}
+</select>
+
+
+
+<update id ="Refer_Inc" parameterType="int"> <!-- usrRefer 필드값 증가, 파라미터타입에는 #{rno}가 존재하는 곳의 경로를 기재. -->
+UPDATE BOARD SET
+USR_REFER=USR_REFER+1 WHERE RCD_NO=#{rcdNo}
+</update>
+
+<update id="rcd_Change" parameterType="com.hnb.article.ArticleVO">
+UPDATE BOARD SET
+USR_MAIL={#usrMail},
+USR_SUBJECT={#usrSubject},
+USR_Content={#usrContent}
+WHERE RCD_NO={#rcdNo}
+</update>
+
+
+<!-- 해당 번호의 레코드 삭제 -->
+<delete id = "remove" parameterType="int">
+DELETE FROM BOARD WHERE RCD_NO={#rcdNo}
+</delete>
+
+
+
+
+
+</mapper>

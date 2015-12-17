@@ -1,5 +1,6 @@
 package com.hnb.event;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -34,19 +35,15 @@ public class EventController {
 			Model model){
 		logger.info("EventController-article()");
 		logger.info("넘어온 페이지번호 : {}", pageNo);
-		List<ArticleVO> list = articleService.getList(CommandFactory.list(pageNo)); 
-		
-		/*Command command = CommandFactory.list(pageNo);*/
-		/*model.addAttribute("memberList",service.getList(CommandFactory.list(pageNo))); 타일즈의 .jsp로 들어가게됨
-		model.addAttribute("count", service.count());
-		model.addAttribute("pageNo",pageNo);*/
+		List<ArticleVO> list = new ArrayList<ArticleVO>();
 		return list;
 	}
+//	List<ArticleVO> list = articleService.getList(CommandFactory.list(pageNo)); 
 
 	@RequestMapping("/boardList")
 	public String goList(){
 		logger.info("EventController-goList 진입");
-		return "event/boardList.jsp";
+		return "event/boardList.tiles";
 	}
 	
 	
