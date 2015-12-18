@@ -24,18 +24,31 @@ $(function() {
 		var pagination = '<TABLE id="pagination">'
 		+'<TR>'
 		+'<TD ALIGN=LEFT WIDTH=100>'
-		+'<IMG SRC="${img}/btn_new.gif" onClick="" STYLE=CURSOR:HAND></TD>'
-		+'<TD WIDTH=320 ALIGN=CENTER>'
+		+'<IMG SRC="${img}/btn_new.gif" onClick="" STYLE=CURSOR:HAND>'
+		+'</TD>'
+		+'<TD WIDTH=320 ALIGN=CENTER>';
+		
 		+'<c:if test="${startPage ne 1}">'
 		+'<a href="${context}/event/boardList/1">'
-		+'<IMG SRC="${img}/btn_bf_block.gif"></a></c:if>'
+		+'<IMG SRC="${img}/btn_bf_block.gif">'
+		+'</a>'
+		+'</c:if>'
 		+'<c:if test="${startPage - GROUPSIZE gt 0}">'
 		+'<a href="${context}/event/boardList/${startPage-GROUPSIZE}">'
-		+'<IMG SRC="${img}/btn_bf_page.gif"></a></c:if>'
+		+'<IMG SRC="${img}/btn_bf_page.gif">'
+		+'</a>'
+		+'</c:if>';
+		
+		
+		
 		+'<c:if test="${startPage + GROUPSIZE le totPage}">'
 		+'<a href="${context}/event/boardList/${startPage+GROUPSIZE}">'
-		+'<IMG SRC="${img}/btn_nxt_page.gif"></a></c:if></TD>'
-		+'<TD WIDTH=200 ALIGN=RIGHT>'
+		+'<IMG SRC="${img}/btn_nxt_page.gif">'
+		+'</a>'
+		+'</c:if>'
+		+'</TD>';
+				
+		pagination += '<TD WIDTH=200 ALIGN=RIGHT>'
 		+'<FORM NAME="memberSearch" action="${context}/event/memberSearch/1">'
 		+'<SELECT NAME="column" SIZE=1>'
 		+'<OPTION VALUE="" SELECTED>선택</OPTION>'
@@ -46,7 +59,8 @@ $(function() {
 		+'<input type="submit" value="검색" />'
 		+'</FORM>'
 		+'</TD>'
-		+'</TR></TABLE>';
+		+'</TR>'
+		+'</TABLE>';
 		table += pagination;
 		$('.mainView').html(table);
 	});
