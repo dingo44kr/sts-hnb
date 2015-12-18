@@ -93,11 +93,11 @@
 		});
 		
 		$("#board_btn").click(function() {
-			location.href = context+"/event/boardList";
+			location.href = context+"/article/list";
 		});
 	
 		$("#admin_btn").click(function() {
-			location.href=context+"/admin/main";
+			location.href =context+"/admin/main";
 		});
 		
 		/* 로그인 버튼 */

@@ -10,6 +10,9 @@
 
 <script>
 var context = '${context}';
+var img = '${img}'
+var js = '${js}'
+var css = '${css}'
 </script>
 
 

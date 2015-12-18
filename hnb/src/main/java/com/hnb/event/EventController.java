@@ -23,31 +23,8 @@ import com.hnb.member.MemberVO;
 @Controller
 @RequestMapping("/event")
 public class EventController {
-	@Autowired MemberServiceImpl service;
-	@Autowired ArticleVO article;
-	@Autowired ArticleServiceImpl articleService;
-	
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
-	
-	@RequestMapping("/boardList/{pageNo}")
-	public @ResponseBody List<ArticleVO> boardList(
-			@PathVariable("pageNo")String pageNo,
-			Model model){
-		logger.info("EventController-article()");
-		logger.info("넘어온 페이지번호 : {}", pageNo);
-		List<ArticleVO> list = new ArrayList<ArticleVO>();
-		return list;
-	}
-//	List<ArticleVO> list = articleService.getList(CommandFactory.list(pageNo)); 
-
-	@RequestMapping("/boardList")
-	public String goList(){
-		logger.info("EventController-goList 진입");
-		return "event/boardList.tiles";
-	}
-	
-	
-	
+	@Autowired MemberServiceImpl memberService;
 	@RequestMapping("memberSearch/{pageNo}")
 	public String memberSearch(
 			@PathVariable("pageNo")String pageNo,
@@ -60,8 +37,8 @@ public class EventController {
 		logger.info("넘어온 컬럼 : {}", column);
 		logger.info("넘어온 검색어 : {}", keyword);
 		Command command = CommandFactory.search(column, keyword, pageNo);
-		List<MemberVO> list = service.searchByKeyword(command);
-		int count = service.countByKeyword(command);
+		List<MemberVO> list = memberService.searchByKeyword(command);
+		int count = memberService.countByKeyword(command);
 		logger.info("리스트 결과 사이즈: {}", list.size());
 		model.addAttribute("memberList", list);
 		model.addAttribute("pageNo", pageNo);

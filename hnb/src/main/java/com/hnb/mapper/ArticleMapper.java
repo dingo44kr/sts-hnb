@@ -13,7 +13,7 @@ public interface ArticleMapper {
 	public int write(ArticleVO article);
 	
 	// R : 조회
-	public List<ArticleVO> getList(Command command); //전체회원목록
+	public List<ArticleVO> getList(Command command); //전체조회(게시판 별)
 	public List<ArticleVO> desc_list(Command command); //전체 글 목록 RcdNo-내림차순으로 조회하기 
 	public List<ArticleVO> searchByKeyword(Command command); //임의의 값으로 검색
 	public ArticleVO searchById(int rcdNo); //글번호로 조회

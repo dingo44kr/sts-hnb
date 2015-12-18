@@ -17,4 +17,8 @@ public class CommandFactory {
 		logger.info("CommandFactory : 페이지넘버={}",pageNo);
 		return new Command(column, keyword, pageNo);
 	}
+	public static Command boardList(String pageNo, String themeNo){
+		logger.info("CommandFactory : 페이지넘버={}",pageNo);
+		return new Command(pageNo, themeNo);
+	}
 }

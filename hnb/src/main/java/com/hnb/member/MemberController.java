@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.hnb.global.Constants;
 import com.hnb.global.FileUpload;
 
-
 @Controller
 @SessionAttributes("user")
 @RequestMapping("/member")

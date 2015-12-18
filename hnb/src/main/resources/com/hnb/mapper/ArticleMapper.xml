@@ -32,19 +32,20 @@ FROM BOARD WHERE RCD_NO=#{id}
      	SELECT
      		RCD_NO AS rcdNo,
      		GRP_NO AS grpNo,
-     		THEME_NO AS themeNo,
      		USR_NAME AS usrName,
      		USR_MAIL AS usrMail,
+     		THEME_NO AS themeNo,
      		USR_SUBJECT AS usrSubject,
-     		USR_CONTENT AS usrComponent,
-     		USR_PASS AS usrPass,
-     		USR_FILENAME AS usrFileName,
-     		USR_FILESIZE AS usrFileSize,
+     		USR_CONTENT AS usrContent,
+     		USRPASS AS usrPass,
+     		USR_FILE_NAME AS usrFileName,
+     		USR_FILE_SIZE AS usrFileSize,
      		USR_DATE AS usrDate,
      		USR_REFER AS usrRefer,
      		RCD_LEVEL AS rcdLevel,
      		RCD_ORDER AS rcdOrder
      	FROM BOARD
+     	WHERE THEME_NO = #{themeNo}
      </select>
  
      <select id="selectSomeBy" parameterType="com.hnb.global.Command" resultType="com.hnb.article.ArticleVO">
