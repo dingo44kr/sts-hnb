@@ -17,14 +17,20 @@ public class JdbcTest {
 					Constants.HSQL_URL,
 					Constants.HSQL_ID,
 					Constants.HSQL_PASSWORD);*/
-        	Class.forName(Constants.ORACLE_DRIVER);
+       /* 	Class.forName(Constants.ORACLE_DRIVER);
             conn = DriverManager.getConnection(
 					Constants.ORACLE_URL,
 					Constants.ORACLE_ID,
-					Constants.ORACLE_PASSWORD);
+					Constants.ORACLE_PASSWORD);*/
+        	
+        	Class.forName(Constants.MYSQL_DRIVER);
+            conn = DriverManager.getConnection(
+					Constants.MYSQL_URL,
+					Constants.MYSQL_ID,
+					Constants.MYSQL_PASSWORD);
 				stmt = conn.createStatement();
 				
-				rs = stmt.executeQuery("select name from member where id = 'iu' ");
+				rs = stmt.executeQuery("SELECT NAME FROM TEST WHERE ID = 'iu' ");
 				String id = null;
 				while (rs.next()) {
 					id = rs.getString("name");
