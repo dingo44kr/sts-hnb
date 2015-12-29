@@ -251,6 +251,12 @@
   
 
 
+	<!-- MySQL을 sts에서 사용하기 위해서 필요(커넥터) -->
+		<dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.6</version>
+        </dependency>
 
 
 

@@ -16,7 +16,7 @@ import com.hnb.movie.MovieServiceImpl;
 
 @Service
 public class MemberServiceImpl  implements MemberService{
-	private static final Logger logger = LoggerFactory.getLogger(MovieServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 	@Autowired private SqlSession sqlSession;
 	
 	

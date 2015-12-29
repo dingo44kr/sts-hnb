@@ -10,7 +10,7 @@
 	
 	<!-- context = static -->
 	
-	<context:property-placeholder location="classpath:config/jdbc.properties"/>
+	<context:property-placeholder location="classpath:config/mysql.properties"/>
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<value>classpath:config/mysql.properties</value>
